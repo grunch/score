@@ -185,129 +185,131 @@ class _MatchScreenState extends State<MatchScreen> {
     final isMatchActive = matchProvider.currentMatch?.status == MatchStatus.inProgress;
     
     return Container(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        children: [
-          // Fighter name and color
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-            decoration: BoxDecoration(
-              color: Color(int.parse(color.replaceFirst('#', '0xFF'))),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Column(
-              children: [
-                Text(
-                  name,
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: _getTextColor(color),
+      padding: const EdgeInsets.all(12),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            // Fighter name and color
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+              decoration: BoxDecoration(
+                color: Color(int.parse(color.replaceFirst('#', '0xFF'))),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Column(
+                children: [
+                  Text(
+                    name,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: _getTextColor(color),
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  '$totalScore',
-                  style: TextStyle(
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                    color: _getTextColor(color),
+                  const SizedBox(height: 6),
+                  Text(
+                    '$totalScore',
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                      color: _getTextColor(color),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          const SizedBox(height: 24),
-          
-          // Points section
-          const Text(
-            'Points',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.black87,
+            const SizedBox(height: 16),
+            
+            // Points section
+            const Text(
+              'Points',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
             ),
-          ),
-          const SizedBox(height: 12),
-          
-          // 2 Points
-          _buildScoreControl(
-            context,
-            matchProvider,
-            label: '2 Points',
-            value: pt2,
-            isActive: isMatchActive,
-            onAdd: () => matchProvider.addPoints(fighter, 2),
-            onRemove: () => matchProvider.removePoints(fighter, 2),
-          ),
-          
-          // 3 Points
-          _buildScoreControl(
-            context,
-            matchProvider,
-            label: '3 Points',
-            value: pt3,
-            isActive: isMatchActive,
-            onAdd: () => matchProvider.addPoints(fighter, 3),
-            onRemove: () => matchProvider.removePoints(fighter, 3),
-          ),
-          
-          // 4 Points
-          _buildScoreControl(
-            context,
-            matchProvider,
-            label: '4 Points',
-            value: pt4,
-            isActive: isMatchActive,
-            onAdd: () => matchProvider.addPoints(fighter, 4),
-            onRemove: () => matchProvider.removePoints(fighter, 4),
-          ),
-          
-          const SizedBox(height: 20),
-          
-          // Advantages
-          const Text(
-            'Advantages',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.black87,
+            const SizedBox(height: 8),
+            
+            // 2 Points
+            _buildScoreControl(
+              context,
+              matchProvider,
+              label: '2 Points',
+              value: pt2,
+              isActive: isMatchActive,
+              onAdd: () => matchProvider.addPoints(fighter, 2),
+              onRemove: () => matchProvider.removePoints(fighter, 2),
             ),
-          ),
-          const SizedBox(height: 8),
-          _buildScoreControl(
-            context,
-            matchProvider,
-            label: 'Advantages',
-            value: advantages,
-            isActive: isMatchActive,
-            onAdd: () => matchProvider.addAdvantage(fighter),
-            onRemove: () => matchProvider.removeAdvantage(fighter),
-          ),
-          
-          const SizedBox(height: 20),
-          
-          // Penalties
-          const Text(
-            'Penalties',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.black87,
+            
+            // 3 Points
+            _buildScoreControl(
+              context,
+              matchProvider,
+              label: '3 Points',
+              value: pt3,
+              isActive: isMatchActive,
+              onAdd: () => matchProvider.addPoints(fighter, 3),
+              onRemove: () => matchProvider.removePoints(fighter, 3),
             ),
-          ),
-          const SizedBox(height: 8),
-          _buildScoreControl(
-            context,
-            matchProvider,
-            label: 'Penalties',
-            value: penalties,
-            isActive: isMatchActive,
-            onAdd: () => matchProvider.addPenalty(fighter),
-            onRemove: () => matchProvider.removePenalty(fighter),
-          ),
-        ],
+            
+            // 4 Points
+            _buildScoreControl(
+              context,
+              matchProvider,
+              label: '4 Points',
+              value: pt4,
+              isActive: isMatchActive,
+              onAdd: () => matchProvider.addPoints(fighter, 4),
+              onRemove: () => matchProvider.removePoints(fighter, 4),
+            ),
+            
+            const SizedBox(height: 12),
+            
+            // Advantages
+            const Text(
+              'Advantages',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
+            ),
+            const SizedBox(height: 6),
+            _buildScoreControl(
+              context,
+              matchProvider,
+              label: 'Advantages',
+              value: advantages,
+              isActive: isMatchActive,
+              onAdd: () => matchProvider.addAdvantage(fighter),
+              onRemove: () => matchProvider.removeAdvantage(fighter),
+            ),
+            
+            const SizedBox(height: 12),
+            
+            // Penalties
+            const Text(
+              'Penalties',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
+            ),
+            const SizedBox(height: 6),
+            _buildScoreControl(
+              context,
+              matchProvider,
+              label: 'Penalties',
+              value: penalties,
+              isActive: isMatchActive,
+              onAdd: () => matchProvider.addPenalty(fighter),
+              onRemove: () => matchProvider.removePenalty(fighter),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -322,14 +324,14 @@ class _MatchScreenState extends State<MatchScreen> {
     required VoidCallback onRemove,
   }) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 8),
+      margin: const EdgeInsets.only(bottom: 6),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           // Remove button
           SizedBox(
-            width: 40,
-            height: 40,
+            width: 36,
+            height: 36,
             child: ElevatedButton(
               onPressed: isActive && value > 0 ? onRemove : null,
               style: ElevatedButton.styleFrom(
@@ -337,25 +339,25 @@ class _MatchScreenState extends State<MatchScreen> {
                 foregroundColor: Colors.white,
                 padding: EdgeInsets.zero,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(6),
                 ),
               ),
-              child: const Icon(Icons.remove, size: 20),
+              child: const Icon(Icons.remove, size: 18),
             ),
           ),
           
           // Value display
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(6),
               border: Border.all(color: Colors.grey[300]!),
             ),
             child: Text(
               '$value',
               style: const TextStyle(
-                fontSize: 18,
+                fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -363,8 +365,8 @@ class _MatchScreenState extends State<MatchScreen> {
           
           // Add button
           SizedBox(
-            width: 40,
-            height: 40,
+            width: 36,
+            height: 36,
             child: ElevatedButton(
               onPressed: isActive ? onAdd : null,
               style: ElevatedButton.styleFrom(
@@ -372,10 +374,10 @@ class _MatchScreenState extends State<MatchScreen> {
                 foregroundColor: Colors.white,
                 padding: EdgeInsets.zero,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(6),
                 ),
               ),
-              child: const Icon(Icons.add, size: 20),
+              child: const Icon(Icons.add, size: 18),
             ),
           ),
         ],
