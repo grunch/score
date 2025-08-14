@@ -239,6 +239,7 @@ class _MatchScreenState extends State<MatchScreen> {
               label: '2 Points',
               value: pt2,
               isActive: isMatchActive,
+              pointValue: 2,
               onAdd: () => matchProvider.addPoints(fighter, 2),
               onRemove: () => matchProvider.removePoints(fighter, 2),
             ),
@@ -250,6 +251,7 @@ class _MatchScreenState extends State<MatchScreen> {
               label: '3 Points',
               value: pt3,
               isActive: isMatchActive,
+              pointValue: 3,
               onAdd: () => matchProvider.addPoints(fighter, 3),
               onRemove: () => matchProvider.removePoints(fighter, 3),
             ),
@@ -261,6 +263,7 @@ class _MatchScreenState extends State<MatchScreen> {
               label: '4 Points',
               value: pt4,
               isActive: isMatchActive,
+              pointValue: 4,
               onAdd: () => matchProvider.addPoints(fighter, 4),
               onRemove: () => matchProvider.removePoints(fighter, 4),
             ),
@@ -322,7 +325,11 @@ class _MatchScreenState extends State<MatchScreen> {
     required bool isActive,
     required VoidCallback onAdd,
     required VoidCallback onRemove,
+    int? pointValue,
   }) {
+    final bool isPointsControl = pointValue != null;
+    final double buttonWidth = isPointsControl ? 42.0 : 36.0;
+    
     return Container(
       margin: const EdgeInsets.only(bottom: 6),
       child: Row(
@@ -330,7 +337,7 @@ class _MatchScreenState extends State<MatchScreen> {
         children: [
           // Remove button
           SizedBox(
-            width: 36,
+            width: buttonWidth,
             height: 36,
             child: ElevatedButton(
               onPressed: isActive && value > 0 ? onRemove : null,
@@ -342,7 +349,15 @@ class _MatchScreenState extends State<MatchScreen> {
                   borderRadius: BorderRadius.circular(6),
                 ),
               ),
-              child: const Icon(Icons.remove, size: 18),
+              child: isPointsControl 
+                  ? Text(
+                      '-$pointValue',
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
+                  : const Icon(Icons.remove, size: 18),
             ),
           ),
           
@@ -365,7 +380,7 @@ class _MatchScreenState extends State<MatchScreen> {
           
           // Add button
           SizedBox(
-            width: 36,
+            width: buttonWidth,
             height: 36,
             child: ElevatedButton(
               onPressed: isActive ? onAdd : null,
@@ -377,7 +392,15 @@ class _MatchScreenState extends State<MatchScreen> {
                   borderRadius: BorderRadius.circular(6),
                 ),
               ),
-              child: const Icon(Icons.add, size: 18),
+              child: isPointsControl 
+                  ? Text(
+                      '+$pointValue',
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
+                  : const Icon(Icons.add, size: 18),
             ),
           ),
         ],
